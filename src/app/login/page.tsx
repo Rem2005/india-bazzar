@@ -40,9 +40,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-500">Login</h2>
 
-        <div className="space-y-4">
+        <div className="[&_input::placeholder]:text-gray-400 [&_input]:text-black space-y-4">
           <input
             type="email"
             value={email}

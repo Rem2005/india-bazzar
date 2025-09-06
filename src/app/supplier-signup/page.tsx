@@ -29,7 +29,6 @@ export default function SupplierSignup() {
   const recaptchaRef = useRef<any>(null);
 
   useEffect(() => {
-    // Ensure reCAPTCHA container exists
     if (!document.getElementById('recaptcha-container')) {
       const div = document.createElement('div');
       div.id = 'recaptcha-container';
@@ -57,11 +56,9 @@ export default function SupplierSignup() {
       if (!recaptchaRef.current) {
         recaptchaRef.current = new RecaptchaVerifier(auth, 'recaptcha-container', {
           size: 'invisible',
-          callback: () => {
-            // reCAPTCHA solved
-          },
+          callback: () => {},
         });
-        await recaptchaRef.current.render(); // ensure it's attached
+        await recaptchaRef.current.render();
       }
 
       const result = await signInWithPhoneNumber(auth, '+91' + form.phone, recaptchaRef.current);
@@ -99,95 +96,96 @@ export default function SupplierSignup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Supplier Signup</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-500">Supplier Signup</h2>
         {error && <p className="text-red-500 mb-3">{error}</p>}
 
-        {!otpSent ? (
-          <>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full border p-2 mb-2"
-              required
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={form.city}
-              onChange={handleChange}
-              className="w-full border p-2 mb-2"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border p-2 mb-2"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full border p-2 mb-2"
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={handleChange}
-              className="w-full border p-2 mb-2"
-              required
-            />
-            <input
-              type="text"
-              name="gstin"
-              placeholder="GSTIN"
-              value={form.gstin}
-              onChange={handleChange}
-              className="w-full border p-2 mb-4"
-              required
-            />
-            <button
-              type="button"
-              onClick={sendOTP}
-              className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600"
-            >
-              Send OTP
-            </button>
-          </>
-        ) : (
-          <>
-            <input
-              type="text"
-              name="otp"
-              placeholder="Enter OTP"
-              value={form.otp}
-              onChange={handleChange}
-              className="w-full border p-2 mb-3"
-              required
-            />
-            <button
-              type="button"
-              onClick={verifyOTPAndSignup}
-              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              Verify OTP & Signup
-            </button>
-          </>
-        )}
+        <div className="[&_input::placeholder]:text-gray-400 [&_input]:text-black">
+          {!otpSent ? (
+            <>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={form.name}
+                onChange={handleChange}
+                className="w-full border p-2 mb-2"
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="City"
+                value={form.city}
+                onChange={handleChange}
+                className="w-full border p-2 mb-2"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                className="w-full border p-2 mb-2"
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                className="w-full border p-2 mb-2"
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={form.phone}
+                onChange={handleChange}
+                className="w-full border p-2 mb-2"
+                required
+              />
+              <input
+                type="text"
+                name="gstin"
+                placeholder="GSTIN"
+                value={form.gstin}
+                onChange={handleChange}
+                className="w-full border p-2 mb-4"
+                required
+              />
+              <button
+                type="button"
+                onClick={sendOTP}
+                className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600"
+              >
+                Send OTP
+              </button>
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                name="otp"
+                placeholder="Enter OTP"
+                value={form.otp}
+                onChange={handleChange}
+                className="w-full border p-2 mb-3"
+                required
+              />
+              <button
+                type="button"
+                onClick={verifyOTPAndSignup}
+                className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+              >
+                Verify OTP & Signup
+              </button>
+            </>
+          )}
+        </div>
 
-        {/* This div is still necessary for reCAPTCHA */}
         <div id="recaptcha-container"></div>
       </div>
     </div>

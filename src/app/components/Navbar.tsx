@@ -8,7 +8,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow px-6 py-4 flex justify-between items-center">
-      <Link href="/" className="text-xl font-bold text-primary">India Bazzar</Link>
+<Link href="/" className="text-xl font-bold text-black hover:text-gray-700">India Bazzar</Link>
 
       <div className="space-x-4">
         {user ? (
